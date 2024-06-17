@@ -1,56 +1,12 @@
 import cv2
 from PIL import Image, ImageChops
 import numpy as np
-# img=cv2.imread('sample.png',1)
-# print(img)
-# cv2.imshow('win',img)
-# k=cv2.waitKey(0)
-# if k==27:
-#     cv2.destroyAllWindows()
-# elif k==ord('s'):
-#     cv2.imwrite('samplecopy.png',img)
-#     cv2.destroyAllWindows()
-
-# cap=cv2.VideoCapture(1);
-# i=cv2.imread('img3.jpg',1)
-# cv2.imshow('wim',i)
-# k=cv2.waitkey(3000)
-# j=cv2.imread('img2.jpg',1)
-# while(True):
-#     ret,fra=cap.read()
-#     d=cv2.absdiff(i,j)
-#     cv2.imshow('webcam',d)
-#     if cv2.waitKey(1) & 0xFF==ord('q'):
-#         break
-#     k=cv2.waitKey(1)
-#     if(k==ord('q')):
-#         break
-# cap.release()
-# cv2.destroyAllWindows()
-
-
-
-
-# i1=Image.open("/Users/saiswaroop/Downloads/img1.JPG")
-# i2=Image.open("/Users/saiswaroop/Downloads/img2.JPG")
-# i3=Image.open("/Users/saiswaroop/Downloads/img3.JPG")
-# d=ImageChops.difference(i2,i3)
-# d.show()
-
 def click_event(event, x, y, flags, param):
     if event == cv2.EVENT_LBUTTONDOWN:
         print(x,', ' ,y)
         font = cv2.FONT_HERSHEY_SIMPLEX
         strXY = str(x) + ', '+ str(y)
         cv2.putText(img, strXY, (x, y), font, .5, (255, 255, 0), 2)
-        cv2.imshow('image', img)
-    if event == cv2.EVENT_RBUTTONDOWN:
-        blue = img[y, x, 0]
-        green = img[y, x, 1]
-        red = img[y, x, 2]
-        font = cv2.FONT_HERSHEY_SIMPLEX
-        strBGR = str(blue) + ', '+ str(green)+ ', '+ str(red)
-        cv2.putText(img, strBGR, (x, y), font, .5, (0, 255, 255), 2)
         cv2.imshow('image', img)
 cap = cv2.VideoCapture("samplevideo.mp4")
 ri= cv2.imread('back.png')
@@ -140,8 +96,6 @@ while True:
     wl=wi[:,2:]
     ws= np.ones((1000, 2, 3), dtype=np.uint8) * 255
     cv2.line(ws, (0, 20 * int(tp)), (0, 1000), (0, 0, 0), 3)
-    # wr = np.ones((2, 500, 3), dtype=np.uint8) * 255  # wr=white right adding image
-    # wr=cv2.line(wr,(0,5*int(tp)),(0,500),(0,0,0),3)
     di= np.hstack((wl, ws)) #di=data image
     wi=di
     di=cv2.flip(di,0)
@@ -159,41 +113,3 @@ while True:
         break
 cap.release()
 cv2.destroyAllWindows()
-
-# def click_event(event, x, y, flags, param):
-#     if event == cv2.EVENT_LBUTTONDOWN:
-#         print(x,', ' ,y)
-#         font = cv2.FONT_HERSHEY_SIMPLEX
-#         strXY = str(x) + ', '+ str(y)
-#         cv2.putText(img, strXY, (x, y), font, .5, (255, 255, 0), 2)
-#         cv2.imshow('image', img)
-#     if event == cv2.EVENT_RBUTTONDOWN:
-#         blue = img[y, x, 0]
-#         green = img[y, x, 1]
-#         red = img[y, x, 2]
-#         font = cv2.FONT_HERSHEY_SIMPLEX
-#         strBGR = str(blue) + ', '+ str(green)+ ', '+ str(red)
-#         cv2.putText(img, strBGR, (x, y), font, .5, (0, 255, 255), 2)
-#         cv2.imshow('image', img)
-# cap = cv2.VideoCapture("samplevideo.mp4")
-# fw= int(cap.get(cv2.CAP_PROP_FRAME_WIDTH))#fw=frame width
-# fh= int(cap.get(cv2.CAP_PROP_FRAME_HEIGHT))#fh=frame height
-# acc= np.zeros((fh, fw, 3), dtype=np.float32)#acc=accumulator
-# fr= cap.get(cv2.CAP_PROP_FPS)#fr=frame rate
-# f=50*fr#f=no.of frames or for no.of seconds
-# fc= 0#fc=frame count
-# while f>=0:
-#     ret, frame = cap.read()
-#     if not ret:
-#         break
-#     acc+= frame
-#     fc+= 1
-#     f-=1
-# le= acc/ fc
-# le= cv2.convertScaleAbs(le)#le=long exposure image
-# img = np.zeros((512, 512, 3), np.uint8)
-# img = cv2.imread('le.png')
-# cv2.imshow('image', img)
-# cv2.setMouseCallback('image', click_event)
-# cv2.waitKey(0)
-# cv2.destroyAllWindows()
