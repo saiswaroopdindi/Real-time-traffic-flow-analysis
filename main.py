@@ -3,7 +3,6 @@ from PIL import Image, ImageChops
 import numpy as np
 def click_event(event, x, y, flags, param):
     if event == cv2.EVENT_LBUTTONDOWN:
-        print(x,', ' ,y)
         font = cv2.FONT_HERSHEY_SIMPLEX
         strXY = str(x) + ', '+ str(y)
         cv2.putText(img, strXY, (x, y), font, .5, (255, 255, 0), 2)
@@ -55,7 +54,6 @@ while True:
             x, y, w, h = cv2.boundingRect(cnt)
             a1+=(w*h)
             cv2.rectangle(frame1, (x, y), (x + w, y + h), (0, 255, 0), 1)
-    #print(a1)
     gray_difference = cv2.cvtColor(difference, cv2.COLOR_BGR2GRAY)
     _, binary_difference = cv2.threshold(gray_difference, 30, 255, cv2.THRESH_BINARY)
     for i in range(0,300,10):
@@ -82,7 +80,6 @@ while True:
     kernel = np.ones((3, 3), np.uint8)
     binary_difference= cv2.morphologyEx(binary_image, cv2.MORPH_OPEN, kernel)
     ta=np.sum(binary_difference == 255) #ta=traffic area
-    print(np.sum(wf == 255),ta)
     tp=2*(ta*100)/ra #tp=traffic percentage
     ti=ta-tps #traffic increased
     tps=ta
