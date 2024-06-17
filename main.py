@@ -101,7 +101,6 @@ while True:
     cv2.imshow('Traffic flow',blk)
     cv2.imshow('Traffic', binary_difference)
     cv2.imshow('Frame', frame)
-    #cv2.imshow('Frame1', frame1)
     cv2.imshow('Road Monitored', wf)
     cv2.imshow('image', img)
     cv2.setMouseCallback('image', click_event)
